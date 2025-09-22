@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TatooMatch - Estúdio de Tatuagem</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+
+      header {
+        background-color: #222;
+        color: #fff;
+        text-align: center;
+        padding: 30px 10px;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2.2em;
+        letter-spacing: 1px;
+      }
+
+      header p {
+        margin-top: 5px;
+        font-size: 1em;
+        color: #ddd;
+      }
+
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 30px;
+      }
+
+      .card {
+        width: 220px;
+        background-color: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      }
+
+      .card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+
+      .card .label {
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.1em;
+        color: #333;
+      }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        display: none;
+        background: rgba(0,0,0,0.7);
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+
+      .modal-content {
+        background: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        width: 350px;
+        max-width: 90%;
+        position: relative;
+      }
+
+      .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 1.2em;
+        cursor: pointer;
+      }
+
+      label {
+        display: block;
+        margin-top: 10px;
+        font-weight: 500;
+      }
+
+      input[type=text], input[type=email] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+      }
+
+      button {
+        margin-top: 15px;
+        padding: 12px 16px;
+        width: 100%;
+        background-color: #222;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background 0.2s;
+      }
+
+      button:hover {
+        background-color: #555;
+      }
+
+      #status {
+        margin-top: 10px;
+        font-size: 0.95em;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>TatooMatch</h1>
+      <p>Escolha sua tatuagem e faça seu pedido</p>
+    </header>
+
+    <div class="grid">
+      {% for t in tattoos %}
+        <div class="card" data-id="{{t.id}}" data-label="{{t.label}}">
+          <img src="/static/tattoos/{{t.file}}" alt="{{t.label}}">
+          <div class="label">{{t.label}}</div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span id="close" class="close">✖</span>
+        <h3 id="chosen">Tatuagem</h3>
+        <form id="requestForm">
+          <input type="hidden" name="tattoo" id="tattooInput">
+          <label>Nome<input type="text" name="name" id="name" required></label>
+          <label>E-mail<input type="email" name="email" id="email" required></label>
+          <label>Telefone<input type="text" name="phone" id="phone"></label>
+          <button type="submit">Enviar pedido</button>
+        </form>
+        <div id="status"></div>
+      </div>
+    </div>
+
+    <script>
+      const cards = document.querySelectorAll('.card')
+      const modal = document.getElementById('modal')
+      const closeBtn = document.getElementById('close')
+      const chosen = document.getElementById('chosen')
+      const tattooInput = document.getElementById('tattooInput')
+      const form = document.getElementById('requestForm')
+      const status = document.getElementById('status')
+
+      cards.forEach(c => c.addEventListener('click', () => {
+        const label = c.dataset.label
+        tattooInput.value = label
+        chosen.textContent = 'Tatuagem: ' + label
+        modal.style.display = 'flex'
+      }))
+
+      closeBtn.addEventListener('click', () => modal.style.display = 'none')
+      modal.addEventListener('click', (e) => { if(e.target === modal) modal.style.display = 'none' })
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        status.style.color = 'green'
+        status.textContent = 'Enviando...'
+        const formData = new FormData(form)
+        const payload = Object.fromEntries(formData.entries())
+        try{
+          const resp = await fetch('/submit', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)})
+          const data = await resp.json()
+          if(resp.ok){
+            status.textContent = 'Pedido enviado com sucesso! Você receberá um e-mail de confirmação.'
+            form.reset()
+            setTimeout(()=> modal.style.display='none', 1200)
+          } else {
+            status.style.color = 'red'
+            status.textContent = 'Erro: ' + (data.error || 'ocorreu um erro')
+          }
+        } catch(err){
+          status.style.color = 'red'
+          status.textContent = 'Erro ao conectar com o servidor.'
+        }
+      })
+    </script>
+  </body>
+</html>
