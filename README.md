@@ -35,7 +35,7 @@ Tattoo_Match/
 
 ### 1. Clone o repositório
 
-1. git clone https://github.com/Allanizepi/Tattoo_Match.git
+1. git clone [https://github.com/Allanizepi/AppWeb_Tattoo_Match]
 cd Tattoo_Match
 
 2. Crie um ambiente virtual (opcional, mas recomendado)
