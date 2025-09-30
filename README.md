@@ -1,49 +1,60 @@
-🎨 Tattoo Match
+# 🎨 Tattoo Match
 
-Aplicação web em Flask para agendamento de tatuagens e melhor gerenciamento do negócio.
+Aplicação web em **Flask** para agendamento de tatuagens em um estúdio e melhor gerenciamento de clientes e do negócio.
 
-✨ Funcionalidades
+---
 
-✔️ Upload de imagens de tatuagens
-✔️ Galeria de imagens armazenadas
-✔️ Comparação / matching de tatuagens semelhantes
-✔️ Interface simples em HTML + CSS
-✔️ Estrutura organizada para expansão futura
+## ✨ Funcionalidades
 
-📂 Estrutura do Projeto
+- ✔️ Agendamento para clientes de tatuagens  
+- ✔️ Galeria de imagens armazenadas  
+- ✔️ Comparação / matching de tatuagens semelhantes  
+- ✔️ Interface simples em HTML + CSS  
+- ✔️ Estrutura organizada para expansão futura  
+
+---
+
+## 📂 Estrutura do Projeto
+
 Tattoo_Match/
-├── Templates/                  # Páginas HTML
+
+├── Templates/ # Páginas HTML
+
 ├── static/
-│   └── tattoos/                 # Imagens de tatuagens
-├── instance/                    # Configurações locais
-├── flask_tattoo_studio_app.py   # Aplicação principal Flask
+
+│ └── tattoos/ # Imagens de tatuagens
+
+├── instance/ # Configurações locais
+
+├── flask_tattoo_studio_app.py # Aplicação principal Flask
+
 └── README.md
 
-⚙️ Instalação & Execução
 
-Clone o repositório
+## ⚙️ Instalação & Execução
 
-git clone https://github.com/Allanizepi/Tattoo_Match.git
+### 1. Clone o repositório
+
+1. git clone https://github.com/Allanizepi/Tattoo_Match.git
 cd Tattoo_Match
 
+2. Crie um ambiente virtual (opcional, mas recomendado)
 
-Crie um ambiente virtual (opcional, mas recomendado)
+Copiar código
 
 python -m venv venv
-source venv/bin/activate   # Linux / macOS
-venv\Scripts\activate      # Windows
 
+venv\Scripts\activate
 
-Instale as dependências
+3. Instale as dependências
 
-pip install flask
-pip install flask_sqlalchemy
-pip install python-dotenv
-pip install pandas
-pip install sendgrid
+Copiar código
 
+pip install flask flask_sqlalchemy python-dotenv pandas sendgrid
 
-Execute a aplicação
+4. Execute a aplicação
+
+Copiar código
 
 python flask_tattoo_studio_app.py
 
@@ -56,17 +67,20 @@ Flask (backend e renderização)
 
 HTML / CSS (frontend)
 
-
 🚀 Próximos Passos
 
 🔹 Melhorar algoritmo de matching (ML/Deep Learning)
-🔹 Adicionar autenticação de usuários (login/cadastro)
-🔹 Criar API REST para integração com apps móveis
-🔹 Interface responsiva com Bootstrap ou TailwindCSS
-🔹 Deploy em servidores como Heroku, AWS ou Render
 
+🔹 Adicionar autenticação de usuários (login/cadastro)
+
+🔹 Criar API REST para integração com apps móveis
+
+🔹 Interface responsiva com Bootstrap ou TailwindCSS
+
+🔹 Deploy em servidores como Heroku, AWS ou Render
 
 👤 Autor
 
 Allan Izepi
+
 📌 GitHub
