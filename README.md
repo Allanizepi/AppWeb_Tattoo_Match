@@ -79,8 +79,4 @@ HTML / CSS (frontend)
 
 🔹 Deploy em servidores como Heroku, AWS ou Render
 
-👤 Autor
-
-Allan Izepi
-
 📌 GitHub
