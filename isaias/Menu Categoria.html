@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tatoo Match</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+      }
+      .layout {
+        display: flex;
+        min-height: 100vh;
+      }
+      .menu-container {
+        width: 20%;
+        background-color: #e6ecf1; /* azul acinzentado claro */
+        padding: 20px;
+        height: 80%;
+        margin-top: 20px;
+        margin-left:10px;
+        border-radius: 10px;
+      }
+      .menu-container ul {
+        list-style: none;
+        padding: 0;
+      }
+      .menu-container li {
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .menu-container li:hover {
+        background-color: #adb5bd;
+        color: #fff;
+      }
+      .content-container {
+        width: 80%;
+        padding: 40px;
+      }
+      /* Esconde o menu fixo no mobile */
+      @media (max-width: 768px) {
+        .menu-container {
+          display: none;
+        }
+        .content-container {
+          width: 100%;
+        }
+        .menu-categorias {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          list-style: none;
+          padding: 0;
+        }
+
+        .menu-item {
+          background-color: #222;
+          color: #fff;
+          padding: 8px 16px;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background 0.3s;
+        }
+
+        .menu-item:hover {
+          background-color: #444;
+        }
+
+        .galeria {
+          margin-top: 20px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+
+        .img-galeria {
+          width: 200px;
+          height: 200px;
+          object-fit: cover;
+          border-radius: 8px;
+        }
+        .título-ul {
+          display: flex;
+          align-items: center; /* Alinha verticalmente */
+          gap: 45px; / 
+          font-weight: bold;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <!-- Navbar para mobile -->
+    <nav class="navbar bg-light d-md-none">
+      <div class="container-fluid">
+        <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
+          ☰ Menu
+        </button>
+      </div>
+    </nav>
+
+    <div class="layout">
+      <!-- Menu Lateral Desktop -->
+      <div class="menu-container d-none d-md-block">
+        <div class="título-ul">
+          <h4>Categoria</h4>
+        </div>
+        <ul>
+          <ul class="menu-categorias">
+            <li class="menu-item estilo" name="Aquarela">Aquarela</li>
+            <li class="menu-item estilo" name="Artista">Artista</li>
+            <li class="menu-item estilo" name="Botânica">Botânica</li>
+            <li class="menu-item estilo" name="Cartum">Cartum</li>
+            <li class="menu-item estilo" name="Free hand">Free Hand</li>
+            <li class="menu-item estilo" name="Old School">Old School</li>
+            <li class="menu-item estilo" name="Preto e Branco">Preto e Branco</li>
+            <li class="menu-item estilo" name="Realista">Realista</li>
+            <li class="menu-item estilo" name="Tribal">Tribal</li>
+            <li class="menu-item estilo" name="Fine Line">Fine Line</li>
+
+            <li class="menu-item tamanho" name="p">Tamanho P</li>
+            <li class="menu-item tamanho" name="m">Tamanho M</li>
+            <li class="menu-item tamanho" name="g">Tamanho G</li>
+</ul>
+
+<div id="galeria" class="galeria"></div>
+
+        </ul>
+      </div>
+
+      <!-- Conteúdo Principal -->
+      <div class="content-container">
+        <h2>Bem-vindo ao Tatoo Match!</h2>
+      </div>
+    </div>
+
+    <!-- Offcanvas Mobile -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Categorias</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <img src="https://via.placeholder.com/150x80" alt="Logo Menu" class="img-fluid mb-3">
+        <ul class="list-unstyled">
+          <li class="py-2 px-3 rounded hover" name = "Aquarela">Aquarela</li>
+          <li class="py-2 px-3 rounded hover" name = "Artista">Artista</li>
+          <li class="py-2 px-3 rounded hover" name = "Botânica">Botânica</li>
+          <li class="py-2 px-3 rounded hover" name = "Cartum">Cartum</li>
+          <li class="py-2 px-3 rounded hover" name = "Free hand">Free Hand</li>
+          <li class="py-2 px-3 rounded hover" name = "Old School">Old School</li>
+          <li class="py-2 px-3 rounded hover" name = "Preto e Branco">Preto e Branco</li>
+          <li class="py-2 px-3 rounded hover" name = "Realista">Realista</li>
+          <li class="py-2 px-3 rounded hover" name = "Tribal">Tribal</li>
+          <li class="py-2 px-3 rounded hover" name = "Fine Line">Fine Line</li>
+          <li class="py-2 px-3 rounded hover" name = "p">Tamanho P</li>
+          <li class="py-2 px-3 rounded hover" name = "m">Tamanho M</li>
+          <li class="py-2 px-3 rounded hover" name = "g">Tamanho G</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
